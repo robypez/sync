@@ -142,9 +142,12 @@ class Sync.View
 
   afterUpdate: -> #noop
   
-  beforeInsert: ($el, data) -> @insert($el)
+  beforeInsert: ($el, data) -> 
+    $el.hide()
+    @insert($el)
 
-  afterInsert: -> #noop
+  afterInsert: ->
+    @$el.fadeIn 'slow'
 
   beforeRemove: -> @remove()
 
@@ -303,9 +306,11 @@ class Sync.PartialCreator
 
 
   insertPlaceholder: (html) ->
-    switch @direction
-      when "append"  then @$el.before(html)
-      when "prepend" then @$el.after(html)
+    @$el.after(html)
+
+    # switch @direction
+    #   when "append"  then @$el.before(html)
+    #   when "prepend" then @$el.after(html)
 
 
 
